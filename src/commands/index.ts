@@ -1,14 +1,14 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import * as ping from "./ping";
+import * as verify from "./verify";
 
 interface Command {
   data: SlashCommandBuilder;
   execute(interaction: CommandInteraction): Promise<void>;
 }
 
-type Commands = { ping: Command };
+type Commands = { verify: Command };
 
-export const commands: Commands = { ping };
+export const commands: Commands = { verify };
 
 export const commandsArray = Object.values(commands);
 

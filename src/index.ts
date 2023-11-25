@@ -1,14 +1,11 @@
-import { Client, Collection } from "discord.js";
+import { Client } from "discord.js";
 import { commands, isOfCommands } from "./commands";
 import config from "./config.json";
 
 const TOKEN = config.TOKEN;
 
-// const clientCommands = new Collection();
-// commands.forEach((command) => command.data.name, commands);
-
 const client = new Client({
-  intents: ["Guilds", "GuildMessages", "DirectMessages"],
+  intents: ["Guilds"],
 });
 
 client.on("ready", (c) => {
@@ -21,7 +18,6 @@ client.on("interactionCreate", async (interaction) => {
   if (!isOfCommands(commandName))
     return console.error(`command ${commandName} is not a command`);
   await commands[commandName].execute(interaction);
-  await interaction.followUp("aah");
 });
 
 client.login(TOKEN);
