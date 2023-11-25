@@ -1,0 +1,40 @@
+{
+  "name": "unserkraft",
+  "version": "1.0.0",
+  "description": "Discord Bot for Minecraft server with maby later more and other configurations",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src/index.ts --minify",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scrythe/UnserKraft.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Minecraft",
+    "Server",
+    "Configurations"
+  ],
+  "author": [
+    "Xaver Ordner",
+    "Magomed Alimkhanov"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scrythe/UnserKraft/issues"
+  },
+  "homepage": "https://github.com/scrythe/UnserKraft#readme",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "tsx": "^4.4.0",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  }
+}
