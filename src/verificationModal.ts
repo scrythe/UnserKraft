@@ -1,13 +1,17 @@
 import {
   ActionRowBuilder,
   ButtonInteraction,
-  CommandInteraction,
   ModalActionRowComponentBuilder,
   ModalBuilder,
   ModalSubmitInteraction,
   TextInputBuilder,
   TextInputStyle,
 } from "discord.js";
+import config from "./config.json";
+import child from "child_process";
+import { appendFile } from "fs/promises";
+
+const { VERIFIEDROLEID } = config;
 
 export async function setupModalSubmit(interaction: ButtonInteraction) {
   const modal = new ModalBuilder()
@@ -67,8 +71,25 @@ export async function modalResponse(interaction: ButtonInteraction) {
     modalInteraction.fields.getTextInputValue("usernameInput");
   const classRes = modalInteraction.fields.getTextInputValue("classInput");
 
+  const surnameCap = surnameRes.charAt(0).toUpperCase() + surnameRes.slice(1);
+  const classCap = classRes.toUpperCase();
+
+  if (!interaction.inCachedGuild()) return;
+  interaction.member.roles.add(VERIFIEDROLEID);
+  // myName + " | " + myKlasse
+  interaction.member.setNickname(`${surnameCap} | ${classCap}`);
+
+  // os.system("mscs send rohrbach whitelist add " + myIngameName)
+  child.exec(`mscs send rohrbach whitelist add ${usernameRes}`);
+
   modalInteraction.reply({
-    content: `Hallo ${surnameRes} aka ${usernameRes} aus der ${classRes}. Du wurdest erfolgreich verifiziert!`,
+    content: `Hallo ${surnameCap} aka ${usernameRes} aus der ${classCap}. Du wurdest erfolgreich verifiziert!`,
     ephemeral: true,
   });
+
+  const currentDate = new Date();
+  appendFile(
+    "logs.output",
+    `${currentDate} Hallo ${surnameCap} aka ${usernameRes} aus der ${classCap}. Du wurdest erfolgreich verifiziert!\n`,
+  );
 }
