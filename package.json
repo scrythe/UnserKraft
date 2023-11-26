@@ -7,7 +7,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsup src/index.ts --minify",
     "start": "node dist/index.js",
-    "deployCommands": "tsx src/deployCommands.ts"
+    "deployCommands": "tsx src/deployCommands.ts",
+    "sendVerifyMsg": "tsx src/sendVerifyMsg.ts"
   },
   "repository": {
     "type": "git",
